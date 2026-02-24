@@ -1,0 +1,54 @@
+# =============================================================================
+# Ocean Climate Evaluation Configuration
+# =============================================================================
+# This config is specifically for ocean climate forecast evaluation.
+# For atmosphere evaluation, use atmos_climate_config.yaml.
+#
+# Each analysis dictionary defines a single evaluation to perform.
+# Analyses can be enabled/disabled via the 'enabled' field.
+
+# ----------------------------------------------------------------------------
+# Inference Dataset (Model Predictions)
+# ----------------------------------------------------------------------------
+# inference_path: "/path/to/inference.zarr"  # Uncomment and set path if not provided via --inference-file
+
+# ----------------------------------------------------------------------------
+# Target Dataset (Observations/Reference)
+# ----------------------------------------------------------------------------
+target_path: "/pscratch/sd/z/zespinos/datasets/ll_1deg_1994-2023_daily_23var_Coupled-3var_96H_ttr.zarr"
+
+# ----------------------------------------------------------------------------
+# Masking Configuration (optional)
+# ----------------------------------------------------------------------------
+masking:
+  enabled: true   # Enable land-sea mask for ocean evaluation
+  type: "land"    # Mask out land points (keep ocean only)
+  path: "/pscratch/sd/z/zespinos/Data/ERA5/daily/era5_1950-2023_daily_1deg_lsm.nc"
+  variable: "lsm" # lsm or land_sea_mask
+  threshold: 0.5  # Values >= 0.5 are considered land (and will be masked)
+
+# ----------------------------------------------------------------------------
+# Analyses
+# ----------------------------------------------------------------------------
+analyses:
+  # ----------------------------------------------------------------------------
+  # Global Average SST Timeseries
+  # ----------------------------------------------------------------------------
+  - name: "global_sst_timeseries"
+    function: "plot_global_sst_timeseries"
+    enabled: true
+    kwargs:
+      variable: "sst"
+      output_path: "climate_outputs/global_sst_timeseries.png"
+      title: "Global Average SST Timeseries"
+  
+  # ----------------------------------------------------------------------------
+  # Example: ENSO Variability Analysis (disabled by default)
+  # ----------------------------------------------------------------------------
+  # - name: "enso_variability"
+  #   function: "analyze_enso"
+  #   enabled: false
+  #   kwargs:
+  #     nino_region: [190, 240, -5, 5]  # [lon_min, lon_max, lat_min, lat_max]
+  #     output_path: "climate_outputs/enso_analysis.nc"
+

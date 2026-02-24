@@ -1,0 +1,347 @@
+# =============================================================================
+# Ocean Plotting Configuration for Model Comparison
+# =============================================================================
+# This config is specifically for ocean forecast plotting/scorecards.
+# For atmosphere plotting, use atmos_plotting_config.yaml.
+
+# Base directory where evaluation files are stored
+eval_base_dir: "/pscratch/sd/z/zespinos/crps_deterministic_evals"
+
+# Forecast type: "ocean" (determines which eval files to load)
+forecast_type: "ocean"
+
+# List of models to compare
+# Each model should have:
+#   - label: Display name for the model in plots
+#   - xid: XID in format train.inf.eval (e.g., "003.002.001")
+#   - path: (optional) Full path to eval file. If not provided, constructed from eval_base_dir, forecast_type, and xid
+models:
+  #### 24H Models ####
+  # - label: "24H Baseline"
+  #   xid: "eval_crps_ocean_24H_ze_023.010.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_crps_ocean_24H_ze_023.010.000/evals_ocean_023.010.001_timeseries.nc"
+  
+  - label: "24H Baseline (Driven all)"
+    xid: "eval_023.010.001"
+    path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_023.010.001/evals_driven_ocean_023.010.001_timeseries.nc"
+
+  # - label: "24H Updated Latent (96,64,64)"
+  #   xid: "eval_064.004.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_064.004.001/evals_driven_ocean_064.004.001_timeseries.nc"
+
+  # - label: "24H Baseline (SIT + SIC)"
+  #   xid: "eval_074.005.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_074.005.001/evals_driven_ocean_074.005.001_timeseries_timeseries.nc"
+
+  # - label: "24H Baseline (bounded temporal; Driven)"
+  #   xid: "eval_068.002.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_068.002.001/evals_driven_ocean_068.002.001_timeseries.nc"
+
+  # - label: "24H Baseline (bounded; Driven)"
+  #   xid: "eval_069.002.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_069.002.001/evals_driven_ocean_069.002.001_timeseries.nc"
+
+  # - label: "24H Baseline (bounded; Driven) (noise mod 32 - 300 epochs)"
+  #   xid: "eval_082.002.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_082.002.001/evals_driven_ocean_082.002.001_timeseries.nc"
+  - label: "24H (bounded; Driven) (encoder 2 + bn + decoder 2)"
+    xid: "eval_090.002.001"
+    path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_090.002.001/evals_driven_ocean_090.002.001_timeseries.nc"
+
+  - label: "24H (bounded; Driven) (bn + decoder 2)"
+    xid: "eval_079.002.000"
+    path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_079.002.000/evals_driven_ocean_079.002.000_timeseries.nc"
+
+  - label: "24H (bounded; Driven) (bn)"
+    xid: "eval_089.002.001"
+    path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_089.002.001/evals_driven_ocean_089.002.001_timeseries.nc"
+
+  
+
+  # - label: "24H Baseline (bounded) (noise mod 32 150 epochs)"
+  #   xid: "eval_091.002.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_091.002.001/evals_ocean_091.002.001_timeseries.nc"
+
+  # - label: "24H Baseline (bounded) (noise mod 32 500 epochs)"
+  #   xid: "eval_093.002.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_093.002.001/evals_ocean_093.002.001_timeseries.nc"
+
+  # - label: "24H Baseline (bounded) (noise mod 32 650 epochs)"
+  #   xid: "eval_094.005.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_094.005.000/evals_ocean_094.005.000_timeseries.nc"
+
+  # - label: "24H Baseline (bounded) (noise mod 32 650 epochs)"
+  #   xid: "eval_094.005.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_094.005.001/evals_ocean_094.005.001_timeseries.nc"
+
+  # - label: "24H Baseline (bounded; Driven) (noise mod 16)"
+  #   xid: "eval_081.002.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_081.002.000/evals_driven_ocean_081.002.000_timeseries.nc"
+
+  # - label: "24H Baseline (bounded mean penalty; Driven)"
+  #   xid: "eval_070.002.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_070.002.001/evals_driven_ocean_070.002.001_timeseries.nc"
+
+  # - label: "24H Baseline (bounded masked spatial; Driven)"
+  #   xid: "eval_071.002.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_071.002.001/evals_driven_ocean_071.002.001_timeseries.nc"
+
+  # - label: "24H Baseline (bounded temporal)"
+  #   xid: "eval_068.002.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_068.002.001/evals_ocean_068.002.001_timeseries.nc"
+
+  # - label: "24H Baseline (bounded)"
+  #   xid: "eval_069.002.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_069.002.001/evals_ocean_069.002.001_timeseries.nc"
+
+  # - label: "24H Baseline (bounded) (noise mod 32)"
+  #   xid: "eval_079.002.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_079.002.000/evals_ocean_079.002.000_timeseries_timeseries.nc"
+
+  # - label: "24H Baseline (bounded; Driven) (noise mod 32) Bigger Atmos"
+  #   xid: "eval_079.006.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_079.006.000/evals_ocean_079.006.000_timeseries_timeseries.nc"
+
+  # - label: "96H Baseline RMSE Bigger Atmos"
+  #   xid: "eval_000.004.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_000.004.000/evals_ocean_000.004.000_timeseries.nc"
+
+  # - label: "24H Baseline (AdaLN-Zero Symmetric ConvNeXt)"
+  #   xid: "eval_083.005.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_083.005.001/evals_ocean_083.005.001_timeseries.nc"
+
+  # - label: "24H Baseline (AdaLN-Zero InceptionNext Driven)"
+  #   xid: "eval_084.005.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_084.005.001/evals_driven_ocean_084.005.001_timeseries.nc"
+
+  # - label: "24H Baseline (CLN 64 Driven)"
+  #   xid: "eval_085.002.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_085.002.001/evals_driven_ocean_085.002.001_timeseries.nc"
+
+  # - label: "24H Baseline (Dialations 1 Driven)"
+  #   xid: "eval_086.002.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_086.002.001/evals_driven_ocean_086.002.001_timeseries.nc"
+
+  # - label: "24H Baseline (192,96,64 Driven)"
+  #   xid: "eval_087.002.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_087.002.001/evals_driven_ocean_087.002.001_timeseries.nc"
+
+  # - label: "24H Baseline (128,96,64,32 Driven)"
+  #   xid: "eval_088.002.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_088.002.001/evals_driven_ocean_088.002.001_timeseries.nc"
+
+  # - label: "24H Baseline (bn noise Driven)"
+  #   xid: "eval_089.002.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_089.002.001/evals_driven_ocean_089.002.001_timeseries.nc"
+
+  # - label: "24H Baseline (2 layer noise Driven)"
+  #   xid: "eval_090.002.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_090.002.001/evals_driven_ocean_090.002.001_timeseries.nc"
+
+
+  # - label: "24H Baseline (Driven)"
+  #   xid: "driven_test"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/driven_test/evals_ocean_timeseries_timeseries.nc"
+
+  # - label: "24H spatial 0.1"
+  #   xid: "eval_crps_ocean_24H_ze_0p1_043.006.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_crps_ocean_24H_ze_0p1_043.006.000/evals_ocean_043.006.001_timeseries.nc"
+
+  # - label: "24H spatial 1.0"
+  #   xid: "eval_crps_ocean_24H_ze_1p0_044.006.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_crps_ocean_24H_ze_1p0_044.006.000/evals_ocean_044.006.001_timeseries.nc"
+
+  # - label: "24H spatial 10.0"
+  #   xid: "eval_crps_ocean_24H_ze_10p0_045.006.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_crps_ocean_24H_ze_10p0_045.006.000/evals_ocean_045.006.001_timeseries.nc"
+
+  # - label: "24H otd2 (option 1 residual)"
+  #   xid: "eval_crps_ocean_24H_ze_otd2_046.002.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_crps_ocean_24H_ze_otd2_046.002.000/evals_ocean_046.002.001_timeseries.nc"
+
+  # - label: "24H otd2 (option 2 residual)"
+  #   xid: "eval_crps_ocean_24H_ze_otd2_062.006.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_crps_ocean_24H_ze_otd2_062.006.000/evals_ocean_062.006.001_timeseries.nc"
+
+  # - label: "24H otd4"
+  #   xid: "eval_crps_ocean_24H_ze_otd4_047.002.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_crps_ocean_24H_ze_otd4_047.002.000/evals_ocean_047.002.001_timeseries.nc"
+
+  # - label: "24H model update"
+  #   xid: "eval_crps_ocean_24H_ze_dp_064.004.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_crps_ocean_24H_ze_dp_064.004.000/evals_ocean_064.004.001_timeseries.nc"
+
+  # - label: "24H model residual option 2"
+  #   xid: "eval_062.006.002"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_062.006.002/evals_ocean_062.006.002_timeseries.nc"
+
+  # - label: "24H model with nan fix"
+  #   xid: "eval_062.006.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_062.006.001/evals_ocean_062.006.001_timeseries.nc"
+
+  # - label: "24H otd6"
+  #   xid: "eval_crps_ocean_24H_ze_otd6_048.002.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_crps_ocean_24H_ze_otd6_048.002.000/evals_ocean_048.002.001_timeseries.nc"
+  
+  # - label: "24H otd8"
+  #   xid: "eval_crps_ocean_24H_ze_otd8_049.002.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_crps_ocean_24H_ze_otd8_049.002.000/evals_ocean_049.002.001_timeseries.nc"
+
+  # - label: "24H 2cycles coupled"
+  #   xid: "eval_crps_ocean_24H_ze_2cycles_066.012.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_066.012.001/evals_ocean_066.012.001_timeseries.nc"
+  
+  # - label: "24H 3cycles coupled"
+  #   xid: "eval_crps_ocean_24H_ze_3cycles_067.012.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_067.012.001/evals_ocean_067.012.001_timeseries.nc"
+
+  # - label: "24H Ocean Only (2cycles)"
+  #   xid: "eval_crps_coupled_24H_2cycles_ocean_076.005.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_crps_coupled_24H_2cycles_ocean_076.005.000/evals_ocean_076.005.001_timeseries.nc"
+
+
+  #### 48H Models ####
+  # - label: "48H Baseline"
+  #   xid: "eval_crps_ocean_48H_ze_021.008.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_crps_ocean_48H_ze_021.008.000/evals_ocean_021.008.001_timeseries.nc"
+
+  # - label: "48H Alpha=0.25"
+  #   xid: "eval_crps_ocean_48H_ze_alpha25_030.002.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_crps_ocean_48H_ze_alpha25_030.002.000/evals_ocean_030.002.001_timeseries.nc"
+
+  # - label: "48H Alpha=0.50"
+  #   xid: "eval_crps_ocean_48H_ze_alpha50_031.002.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_crps_ocean_48H_ze_alpha50_031.002.000/evals_ocean_031.002.001_timeseries.nc"
+
+  # - label: "48H AdamW Optimized, Alpha=0.75"
+  #   xid: "eval_crps_ocean_48H_ze_renorm_AdamW_029.002.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_crps_ocean_48H_ze_renorm_AdamW_029.002.000/evals_ocean_029.002.001_timeseries.nc"
+
+  # - label: "48H residual"
+  #   xid: "eval_crps_ocean_48H_ze_residual_040.002.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_crps_ocean_48H_ze_residual_040.002.000/evals_ocean_040.002.001_timeseries.nc"
+
+  #### 96H Models ####
+  # - label: "96H Coupled Atmos-CRPS FT (baseline)"
+  #   xid: "007.023.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_007.023.001/evals_ocean_007.023.001_timeseries.nc"
+
+  # - label: "96H Coupled Atmos-CRPS-Spectral FT (baseline)"
+  #   xid: "006.010.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_006.010.001/evals_ocean_006.010.001_timeseries.nc"
+
+  # - label: "96H Baseline (renorm)"
+  #   xid: "020.010.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_crps_ocean_96H_ze_020.010.000/evals_ocean_020.010.001_timeseries.nc"
+
+  # - label: "96H 250 epoch"
+  #   xid: "019.012.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_crps_ocean_96H_ze_250epoch_019.012.000/evals_ocean_019.012.001_timeseries.nc"
+
+  # - label: "96H lren4 150"
+  #   xid: "018.010.001"
+    # path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_crps_ocean_96H_ze_lren4_018.010.000/evals_ocean_018.010.001_timeseries.nc"
+
+  # - label: "96H lren6 250"
+  #   xid: "017.010.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_crps_ocean_96H_ze_lren6_017.010.000/evals_ocean_017.010.001_timeseries.nc"
+
+  # - label: "96H Baseline"
+  #   xid: "003.029.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_crps_ocean_ze_003.029.000/evals_ocean_003.029.001_timeseries.nc"
+
+  # - label: "96H Baseline (Driven) (1 weighting)"
+  #   xid: "003.029.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_003.029.001/evals_driven_ocean_003.029.001_timeseries.nc"
+
+  # - label: "96H Baseline Atmos-CRPS (1 weighting)"
+  #   xid: "003.031.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_003.031.001/evals_ocean_003.031.001_timeseries.nc"
+
+  # - label: "96H Baseline RMSE (Driven)"
+  #   xid: "eval_000.000.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_inference/deterministic_ocean_ze_000.000.000/evals_ocean_driven_timeseries_timeseries.nc"
+
+  - label: "Persistence"
+    xid: "persistence"
+    path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/evals_ocean_persistence_timeseries.nc"
+
+
+
+# Baseline model for scorecard comparisons
+# This should match one of the labels in the models list above
+# OR use the baseline config below for climatology/persistence
+# baseline: "Baseline Model"
+
+# Baseline configuration (climatology or persistence)
+# This is used for skill curves (dotted line) and scorecard comparisons
+baseline:
+  enabled: true  # Set to true to include baseline in plots
+  type: "climatology"  # Options: "climatology", "persistence", or "model"
+  path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/evals_ocean_probabilistic_climatology_timeseries.nc"
+  label: "Climatology"  # Display label for baseline
+
+  # type: "model"
+  # label: "24H Baseline (bounded) (noise mod 32)"
+  # path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_079.002.000/evals_driven_ocean_079.002.000_timeseries.nc"
+
+  # type: "model"
+  # label: "24H Baseline (bounded; Driven)"
+  # path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_069.002.001/evals_driven_ocean_069.002.001_timeseries.nc"
+  
+  # type: "model"
+  # label: "24H Baseline (bounded)"
+  # path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_069.002.001/evals_ocean_069.002.001_timeseries.nc"
+
+  # type: "model"
+  # label: "24H Baseline (bounded; Driven)"
+  # path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_069.002.001/evals_driven_ocean_069.002.001_timeseries.nc"
+
+  # type: "model"
+  # label: "24H Baseline (Driven)"
+  # path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_023.010.001/evals_driven_ocean_023.010.001_timeseries.nc"
+
+  # type: "model"
+  # label: "24H Baseline"
+  # path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_crps_ocean_24H_ze_023.010.000/evals_ocean_023.010.001_timeseries.nc"
+
+  # persistence
+  # path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/evals_ocean_persistence_timeseries.nc"
+  # type: "persistence"
+  # label: "Persistence"
+
+  # type: "model"
+  # path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_crps_ocean_24H_ze_023.010.000/evals_ocean_023.010.001_timeseries.nc"
+  # label: "24H Baseline"
+
+  # type: "model"
+  # label: "24H 2cycles coupled"
+  # path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_066.012.001/evals_ocean_066.012.001_timeseries.nc"
+
+  # path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_crps_ocean_24H_ze_otd4_047.002.000/evals_ocean_047.002.001_timeseries.nc"
+  # label: "24H otd4"
+
+
+
+# Plotting options
+plotting:
+  metric: "crps_skill"  # Metric to plot
+  region: "global"     # Region for skill curves
+  regions: ["global", "arctic"]  # Regions for scorecard (must be exactly 2)
+  
+  # Optional: show only the first N days of lead time (e.g. 45 for 45 days). Omit or null for full range.
+  max_leadtime_days: 90
+
+  # Optional: in skill curves, plot one thin faint line per ensemble member (default: false).
+  show_ensemble_members: false
+
+  # Optional: colorbar limits for scorecard plots.
+  # Provide [vmin, vmax]. If omitted, defaults depend on plot_type.
+  # For relative plots ('improvement'/'diff'), defaults are [-100, 100].
+  # Example to keep current default:
+  colorbar_limits: [-25, 25]
+  
+  # Output paths (optional - can be auto-generated)
+  skill_curves_output: null  # null = auto-generate from xid
+  scorecard_output: null      # null = auto-generate from xid
+

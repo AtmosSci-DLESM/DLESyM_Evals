@@ -1,0 +1,130 @@
+# =============================================================================
+# Ocean Evaluation Configuration
+# =============================================================================
+# This config is specifically for ocean forecast evaluation.
+# For atmosphere evaluation, use atmos_config.yaml.
+
+evaluation:
+  # ----------------------------------------------------------------------------
+  # Time Configuration
+  # ----------------------------------------------------------------------------
+  time_start: "2019-01-02"
+  time_stop: "2019-12-31"
+  # time_stop: "2019-03-01"
+
+  # time_start: "2021-01-02"
+  # time_stop: "2021-05-29"
+  
+  init_chunk_size: 4
+  # Max chunks processed in parallel (limits memory; avoids OOM with many vars/lead times)
+  max_concurrent_chunks: 8
+
+  # ----------------------------------------------------------------------------
+  # Data Loaders
+  # ----------------------------------------------------------------------------
+  data:
+    prediction:
+      # Must match the class name defined in your python script
+      class: "DLESyMPredictionsFromXarray"
+      path: "/pscratch/sd/z/zespinos/crps_deterministic_inference/deterministic_ocean_ze_000.000.000/forecast_ocean_driven_ll.zarr"
+      # Ocean variables
+      variables: ["sit", "sst", "sic", "ssh", "s0m", "s10m", "s50m", "s100m", "s200m", "t0m", "t5m", "t10m", "t25m", "t37.5m", "t50m", "t62.5m", "t75m", "t87.5m", "t100m", "t125m", "t150m", "t200m", "t300m"]
+      
+      # Optional: Rename variables to match WBX standards or Target data
+      # rename:
+      #   temp_850: "t850"
+      #   geopotential_500: "z500"
+      
+      # Loader specific args (passed to super().__init__)
+      compute: true        # Load data into memory after opening
+      add_nan_mask: true  # Set true if you need to handle sparse masks
+
+    target:
+      class: "DLESyMTargetsFromXarray"
+      path: "/pscratch/sd/z/zespinos/datasets/ll_1deg_1994-2023_daily_23var_Coupled-3var_96H_ttr.zarr"
+      # Ocean variables
+      variables: ["sit", "sst", "sic", "ssh", "s0m", "s10m", "s50m", "s100m", "s200m", "t0m", "t5m", "t10m", "t25m", "t37.5m", "t50m", "t62.5m", "t75m", "t87.5m", "t100m", "t125m", "t150m", "t200m", "t300m"]
+
+  # ----------------------------------------------------------------------------
+  # Metrics
+  # ----------------------------------------------------------------------------
+  # Groups of metrics to compute.
+  # Options supported by your script: "deterministic" (RMSE, Bias, ACC), "probabilistic" (CRPS, Spread)
+  metrics: 
+    # - "deterministic"
+    - "probabilistic" # Uncomment if your prediction data has an 'ensemble' dimension
+
+  # ----------------------------------------------------------------------------
+  # Aggregation (Spatial Reduction)
+  # ----------------------------------------------------------------------------
+  masking:
+    enabled: true   # Enable land-sea mask for ocean evaluation
+    type: "land"    # Mask out land points (keep ocean only)
+    path: "/pscratch/sd/z/zespinos/Data/ERA5/daily/era5_1950-2023_daily_1deg_lsm.nc"
+    variable: "lsm" # lsm or land_sea_mask
+    threshold: 0.05  # Values >= 0.5 are considered land (and will be masked)
+
+  aggregation:
+    # Dimensions to collapse during aggregation (usually Lat/Lon to get a global scalar)
+    reduce_dims: ["latitude", "longitude"]
+    
+    weighting:
+      class: "GridAreaWeighting"
+      latitude_name: "latitude" # Check your files: usually 'lat' or 'latitude'
+
+  # ----------------------------------------------------------------------------
+  # Spatial Regions (used for binning in Aggregator)
+  # ----------------------------------------------------------------------------
+  # NOTE: Longitudes here assume a 0–360 convention. 
+  regions:
+    global:
+      lat_min: -90
+      lat_max: 90
+      lon_min: 0
+      lon_max: 360
+    tropics:
+      lat_min: -20
+      lat_max: 20
+      lon_min: 0
+      lon_max: 360
+    arctic:
+      lat_min: 60
+      lat_max: 90
+      lon_min: 0
+      lon_max: 360
+    antarctic:
+      lat_min: -90
+      lat_max: -60
+      lon_min: 0
+      lon_max: 360
+
+  # ----------------------------------------------------------------------------
+  # Output
+  # ----------------------------------------------------------------------------
+  output:
+    path: "/pscratch/sd/z/zespinos/crps_deterministic_inference/deterministic_ocean_ze_000.000.000/evals_ocean_driven_timeseries.nc"
+    
+    # Required if 'deterministic' metrics (ACC) are requested.
+    # Defines the climatology mean for Anomaly Correlation Coefficient.
+    climatology_path: "/pscratch/sd/z/zespinos/datasets/climatologies/ll_1deg_1994-2023_daily_23var_Coupled-3var_96H_ttr_clim_2000_2020.zarr"
+
+  # ----------------------------------------------------------------------------
+  # Baseline Evaluation (Climatology/Persistence)
+  # ----------------------------------------------------------------------------
+  # Generate evaluation files for baseline forecasts (climatology or persistence)
+  baseline_eval:
+    enabled: false  # Set to true to generate baseline evaluation
+    type: "climatology"  # Options: "probabilistic_climatology", "climatology" or "persistence"
+    # For persistence, climatology_path is not used (uses target dataset instead)
+    climatology_path: "/pscratch/sd/z/zespinos/datasets/climatologies/ll_1deg_1994-2023_daily_23var_Coupled-3var_96H_ttr_clim_2000_2020.zarr"
+    # Note: <forecast_type> and <type> will be replaced automatically
+    output_path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/evals_ocean_<type>_timeseries.nc"
+    # Lead times configuration for baseline evaluations
+    # If not specified, will use lead_time from target dataset or default to 0-96h in 6h steps
+    start_year: 2020
+    end_year: 2023
+    lead_times:
+      start: 0        # Start time (hours or days)
+      stop: 2208      # Stop time (hours) - 92 days * 24 hours = 2208
+      step: 24        # Step size (hours) - every 24 hours
+      unit: "hours"   # Unit: "hours" or "days"

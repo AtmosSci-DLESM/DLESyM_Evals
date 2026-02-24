@@ -1,0 +1,63 @@
+# =============================================================================
+# Ocean Evaluation with LSM Aligned to Infilling (Example)
+# =============================================================================
+# Copy this block into your evaluation config when using ocean_land_infill in
+# training/inference and you want evaluation to exclude the same land points
+# (so infilled forecast values do not contribute to skill).
+#
+# Set align_lsm_with_infill: true and supply the same LSM path and land_threshold
+# as in your training/inference configs (e.g. ocean_land_infill_land_threshold: 0.25).
+
+evaluation:
+  time_start: "2019-01-02"
+  time_stop: "2019-12-31"
+  init_chunk_size: 4
+  max_concurrent_chunks: 8
+
+  data:
+    prediction:
+      class: "DLESyMPredictionsFromXarray"
+      path: "/pscratch/sd/z/zespinos/crps_deterministic_inference/crps_ocean_24H_ze_noise_mod_079.006.000/forecast_ocean_ll.zarr"
+      variables: ["sit", "sst", "sic", "ssh", "s0m", "s10m", "s50m", "s100m", "s200m", "t0m", "t5m", "t10m", "t25m", "t37.5m", "t50m", "t62.5m", "t75m", "t87.5m", "t100m", "t125m", "t150m", "t200m", "t300m"]
+      compute: true
+      add_nan_mask: false
+    target:
+      class: "DLESyMTargetsFromXarray"
+      path: "/pscratch/sd/z/zespinos/datasets/ll_1deg_1994-2023_daily_23var_Coupled-3var_24H_ttr.zarr"
+      variables: ["sit", "sst", "sic", "ssh", "s0m", "s10m", "s50m", "s100m", "s200m", "t0m", "t5m", "t10m", "t25m", "t37.5m", "t50m", "t62.5m", "t75m", "t87.5m", "t100m", "t125m", "t150m", "t200m", "t300m"]
+      add_nan_mask: true
+
+  metrics:
+    - "probabilistic"
+
+  # Use same LSM and land-threshold as training/inference infilling
+  align_lsm_with_infill: true
+  masking:
+    enabled: true
+    type: "land"
+    path: "/pscratch/sd/z/zespinos/Data/ERA5/daily/era5_1950-2023_daily_1deg_lsm.nc"
+    variable: "lsm"
+    threshold: 0.05
+    # Required when align_lsm_with_infill is true (match ocean_land_infill_land_threshold)
+    lsm_path: "/pscratch/sd/z/zespinos/Data/ERA5/daily/era5_1950-2023_daily_1deg_lsm.nc"
+    land_threshold: 0.25
+
+  aggregation:
+    reduce_dims: ["latitude", "longitude"]
+    weighting:
+      class: "GridAreaWeighting"
+      latitude_name: "latitude"
+
+  regions:
+    global:
+      lat_min: -90
+      lat_max: 90
+      lon_min: 0
+      lon_max: 360
+
+  output:
+    path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_079.006.000/evals_ocean_079.006.000_align_infill_timeseries.nc"
+    climatology_path: "/pscratch/sd/z/zespinos/datasets/climatologies/ll_1deg_1994-2023_daily_23var_Coupled-3var_96H_ttr_clim_2000_2020.zarr"
+
+  baseline_eval:
+    enabled: false

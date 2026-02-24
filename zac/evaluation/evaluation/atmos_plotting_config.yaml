@@ -1,0 +1,145 @@
+# =============================================================================
+# Atmosphere Plotting Configuration for Model Comparison
+# =============================================================================
+# This config is specifically for atmosphere forecast plotting/scorecards.
+# For ocean plotting, use ocean_plotting_config.yaml.
+
+# Base directory where evaluation files are stored
+eval_base_dir: "/pscratch/sd/z/zespinos/crps_deterministic_evals"
+
+# Forecast type: "atmos" (determines which eval files to load)
+forecast_type: "atmos"
+
+# List of models to compare
+# Each model should have:
+#   - label: Display name for the model in plots
+#   - xid: XID in format train.inf.eval (e.g., "003.002.001")
+#   - path: (optional) Full path to eval file. If not provided, constructed from eval_base_dir, forecast_type, and xid
+models:
+  # - label: "AdamW Optimized, Alpha=0.75"
+  #   xid: "029.002.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_029.002.001/evals_atmos_029.002.001_timeseries.nc"
+
+  # - label: "AdamW, Alpha=0.75"
+  #   xid: "028.002.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_028.002.001/evals_atmos_028.002.001_timeseries.nc"
+
+  # - label: "Alpha=0.25"
+  #   xid: "030.002.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_030.002.001/evals_atmos_030.002.001_timeseries.nc"
+
+  # - label: "Alpha=0.50"
+  #   xid: "031.002.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_031.002.001/evals_atmos_031.002.001_timeseries.nc"
+
+  # - label: "48H Baseline (renorm)"
+  #   xid: "021.008.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_021.008.001/evals_atmos_021.008.001_timeseries.nc"
+
+  # - label: "48H Baseline (renorm) w/48Target"
+  #   xid: "021.008.002"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_021.008.002_w48Htarget/evals_atmos_021.008.002_w48Htarget_timeseries.nc"
+
+  # - label: "24H Baseline (renorm)"
+  #   xid: "023.010.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_023.010.001/evals_atmos_023.010.001_timeseries.nc"
+
+  # - label: "96H Coupled Atmos-CRPS FT (baseline)"
+  #   xid: "007.023.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_007.023.001/evals_atmos_007.023.001_timeseries.nc"
+
+  # - label: "96H Coupled Atmos-CRPS-Spectral FT (baseline)"
+  #   xid: "006.010.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_006.010.001/evals_atmos_006.010.001_timeseries.nc"
+
+  # - label: "96H Baseline (renorm)"
+  #   xid: "020.010.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_020.010.001/evals_atmos_020.010.001_timeseries.nc"
+
+  # - label: "96H Coupled Atmos-CRPS-Spectral FT (baseline)"
+  #   xid: "006.010.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_006.010.001/evals_atmos_006.010.001_timeseries.nc"
+
+  # - label: "96H Baseline (renorm lsm=0.05)"
+  #   xid: "020.010.002"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_020.010.002/evals_atmos_020.010.002_timeseries.nc"
+
+  # - label: "96H 250 epoch"
+  #   xid: "019.012.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_019.012.001/evals_atmos_019.012.001_timeseries.nc"
+
+  # - label: "96H lren4 150"
+  #   xid: "018.010.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_018.010.001/evals_atmos_018.010.001_timeseries.nc"
+
+  # - label: "96H lren6 250"
+  #   xid: "017.010.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_017.010.001/evals_atmos_017.010.001_timeseries.nc"
+
+  # - label: "96H Baseline (1 weighting)"
+  #   xid: "003.029.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_003.029.001/evals_atmos_003.029.001_timeseries.nc"
+
+  # - label: "96H Baseline Atmos-CRPS (1 weighting)"
+  #   xid: "003.031.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_003.031.001/evals_atmos_003.031.001_timeseries.nc"
+
+  - label: "96H Baseline (renorm)"
+    xid: "020.010.001"
+    path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_crps_ocean_96H_ze_020.010.000/evals_atmos_020.010.001_timeseries.nc"
+
+  - label: "96H 250 epoch"
+    xid: "019.012.001"
+    path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_crps_ocean_96H_ze_250epoch_019.012.000/evals_atmos_019.012.001_timeseries.nc"
+
+  - label: "96H lren4 150"
+    xid: "018.010.001"
+    path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_crps_ocean_96H_ze_lren4_018.010.000/evals_atmos_018.010.001_timeseries.nc"
+
+  - label: "24H otd2 (option 2 residual)"
+    xid: "eval_crps_ocean_24H_ze_otd2_062.006.000"
+    path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_crps_ocean_24H_ze_otd2_062.006.000/evals_atmos_062.006.001_timeseries.nc"
+
+  - label: "24H otd4"
+    xid: "eval_crps_ocean_24H_ze_otd4_047.002.000"
+    path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_crps_ocean_24H_ze_otd4_047.002.000/evals_atmos_047.002.001_timeseries.nc"
+
+  - label: "24H model update"
+    xid: "eval_crps_ocean_24H_ze_dp_064.004.000"
+    path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_crps_ocean_24H_ze_dp_064.004.000/evals_atmos_064.004.001_timeseries.nc"
+
+  - label: "Persistence"
+    xid: "persistence"
+    path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/evals_atmos_persistence_timeseries.nc"
+
+
+# Baseline model for scorecard comparisons
+# This should match one of the labels in the models list above
+# OR use the baseline config below for climatology/persistence
+# baseline: "Baseline Model"
+
+# Baseline configuration (climatology or persistence)
+# This is used for skill curves (dotted line) and scorecard comparisons
+baseline:
+  enabled: true  # Set to true to include baseline in plots
+  type: "climatology"  # Options: "climatology", "persistence", or "model"
+  # NOTE: You may need to generate atmosphere climatology baseline first
+  path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/evals_atmos_climatology_timeseries.nc"
+  # path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/evals_atmos_probabilistic_climatology_timeseries.nc"
+  label: "Climatology"  # Display label for baseline
+  # If type is specified and path doesn't start with '/', path will be auto-constructed
+  # from eval_base_dir, forecast_type, and type
+
+# Plotting options
+plotting:
+  metric: "rmse"  # Metric to plot
+  region: "global"     # Region for skill curves
+  regions: ["global", "tropics"]  # Regions for scorecard (must be exactly 2)
+  
+  # Optional: show only the first N days of lead time (e.g. 45 for 45 days). Omit or null for full range.
+  max_leadtime_days: 45
+  
+  # Output paths (optional - can be auto-generated)
+  skill_curves_output: null  # null = auto-generate from xid
+  scorecard_output: null      # null = auto-generate from xid
+

@@ -1,0 +1,54 @@
+# Plotting Configuration for Model Comparison
+# This config file defines which models to compare and which one to use as baseline
+
+# Base directory where evaluation files are stored
+eval_base_dir: "/pscratch/sd/z/zespinos/crps_deterministic_evals"
+
+# Forecast type: "ocean" or "atmos" (determines which eval files to load)
+forecast_type: "ocean"  # or "atmos"
+
+# List of models to compare
+# Each model should have:
+#   - label: Display name for the model in plots
+#   - xid: XID in format train.inf.eval (e.g., "003.002.001")
+#   - path: (optional) Full path to eval file. If not provided, constructed from eval_base_dir, forecast_type, and xid
+models:
+  - label: "Current Model"
+    xid: "003.002.000"
+    path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/evals_2019-2023_ocean_003.002.000_timeseries.nc"
+  
+  # - label: "Persistence"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/evals_ocean_persistence_timeseries.nc"
+
+  - label: "Previous Run"
+    xid: "003.001.001"
+  
+  # - label: "Baseline Model"
+    # xid: "003.001.000"
+
+# Baseline model for scorecard comparisons
+# This should match one of the labels in the models list above
+# OR use the baseline config below for climatology/persistence
+# baseline: "Baseline Model"
+
+# Baseline configuration (climatology or persistence)
+# This is used for skill curves (dotted line) and scorecard comparisons
+baseline:
+  enabled: true  # Set to true to include baseline in plots
+  type: "climatology"  # Options: "climatology", "persistence", or "model"
+  # path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/evals_ocean_climatology_timeseries.nc"
+  path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/evals_ocean_probabilistic_climatology_timeseries.nc"
+  label: "Climatology"  # Display label for baseline
+  # If type is specified and path doesn't start with '/', path will be auto-constructed
+  # from eval_base_dir, forecast_type, and type
+
+# Plotting options
+plotting:
+  metric: "crps_skill"  # Metric to plot
+  region: "global"     # Region for skill curves
+  regions: ["global", "arctic"]  # Regions for scorecard (must be exactly 2)
+  
+  # Output paths (optional - can be auto-generated)
+  skill_curves_output: null  # null = auto-generate from xid
+  scorecard_output: null      # null = auto-generate from xid
+

@@ -1,0 +1,48 @@
+# =============================================================================
+# Atmosphere Climate Evaluation Configuration
+# =============================================================================
+# This config is specifically for atmosphere climate forecast evaluation.
+# For ocean evaluation, use ocean_climate_config.yaml.
+#
+# Each analysis dictionary defines a single evaluation to perform.
+# Analyses can be enabled/disabled via the 'enabled' field.
+
+# ----------------------------------------------------------------------------
+# Inference Dataset (Model Predictions)
+# ----------------------------------------------------------------------------
+# inference_path: "/path/to/inference.zarr"  # Uncomment and set path if not provided via --inference-file
+
+# ----------------------------------------------------------------------------
+# Target Dataset (Observations/Reference)
+# ----------------------------------------------------------------------------
+target_path: "/pscratch/sd/z/zespinos/datasets/ll_1deg_1950-2023_3h_9var_atm_coupled-sst_sic.zarr"
+
+# ----------------------------------------------------------------------------
+# Masking Configuration (optional)
+# ----------------------------------------------------------------------------
+masking:
+  enabled: false  # No masking for atmosphere (evaluate over all grid points)
+  type: "land"    # Not used when enabled: false
+  path: "/pscratch/sd/z/zespinos/Data/ERA5/daily/era5_1950-2023_daily_1deg_lsm.nc"
+  variable: "lsm"
+  threshold: 0.5
+
+# ----------------------------------------------------------------------------
+# Analyses
+# ----------------------------------------------------------------------------
+analyses:
+  # ----------------------------------------------------------------------------
+  # Example: Global Average Temperature Timeseries (disabled by default)
+  # ----------------------------------------------------------------------------
+  # - name: "global_t2m_timeseries"
+  #   function: "plot_global_timeseries"
+  #   enabled: false
+  #   kwargs:
+  #     variable: "t2m"
+  #     output_path: "climate_outputs/global_t2m_timeseries.png"
+  #     title: "Global Average 2m Temperature Timeseries"
+  
+  # ----------------------------------------------------------------------------
+  # Add more atmosphere-specific analyses here as they are implemented
+  # ----------------------------------------------------------------------------
+

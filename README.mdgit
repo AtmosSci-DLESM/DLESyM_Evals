@@ -1,0 +1,1 @@
+# DLESyM_Evals initgit add README.mdgit commit -m first commitgit branch -M maingit remote add origin git@github.com:AtmosSci-DLESM/DLESyM_Evals.gitgit push -u origin main
