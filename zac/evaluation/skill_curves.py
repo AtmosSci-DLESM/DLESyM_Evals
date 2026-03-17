@@ -77,6 +77,52 @@ def _plot_rmse_ens_if_present(ax, ds, var_name, region, x_vals_full, mask_lt, ma
     ax.plot(x_plot, y_vals, color=color, linewidth=2, linestyle=linestyle)
 
 
+def _get_climatology_rmse_for_rmse_ens(experiments, baseline_ds, var_name, region):
+    """When metric is rmse_ens, get climatology RMSE (rmse.<suffix>) from experiments or baseline. Returns (ds, x_vals, data) or (None, None, None)."""
+    suffix = var_name.split(".", 1)[1]
+    rmse_var = "rmse." + suffix
+    # Prefer experiment labeled climatology
+    for label, ds in experiments.items():
+        if label.strip().lower() == "climatology" and rmse_var in ds.data_vars:
+            data = ds[rmse_var].sel(region=region)
+            if np.issubdtype(ds.lead_time.dtype, np.timedelta64):
+                x_vals = ds.lead_time.dt.days.values.copy()
+            else:
+                x_vals = ds.lead_time.values.copy()
+            return ds, x_vals, data
+    if baseline_ds is not None and rmse_var in baseline_ds.data_vars:
+        data = baseline_ds[rmse_var].sel(region=region)
+        if np.issubdtype(baseline_ds.lead_time.dtype, np.timedelta64):
+            x_vals = baseline_ds.lead_time.dt.days.values.copy()
+        else:
+            x_vals = baseline_ds.lead_time.values.copy()
+        return baseline_ds, x_vals, data
+    return None, None, None
+
+
+def _plot_climatology_and_sqrt2_for_rmse_ens(ax, experiments, baseline_ds, var_name, region, max_leadtime_days):
+    """When metric is rmse_ens, plot climatology (rmse.<suffix>) and sqrt(2)*climatology as reference lines."""
+    ds, x_vals_full, data = _get_climatology_rmse_for_rmse_ens(experiments, baseline_ds, var_name, region)
+    if data is None:
+        return
+    if 'init_time' in data.dims:
+        data = data.mean(dim="init_time", skipna=True)
+    if 'number' in data.dims:
+        data = data.mean(dim="number", skipna=True)
+    y_vals = data.values.astype(float)
+    rmse_var = "rmse." + var_name.split(".", 1)[1]
+    if _is_geopotential_var(rmse_var, "rmse"):
+        y_vals = y_vals / GEOPOTENTIAL_TO_METERS
+    if max_leadtime_days is not None:
+        mask_lt = x_vals_full <= max_leadtime_days
+        x_plot = np.asarray(x_vals_full)[mask_lt]
+        y_vals = y_vals[mask_lt]
+    else:
+        x_plot = x_vals_full
+    ax.plot(x_plot, y_vals, color='gray', linewidth=2, linestyle=':', alpha=0.8)
+    ax.plot(x_plot, y_vals * np.sqrt(2), color='gray', linewidth=2, linestyle=':', alpha=0.6)
+
+
 def plot_skill_curves(
     experiments,
     metric,
@@ -146,6 +192,9 @@ def plot_skill_curves(
     if metric == "rmse":
         legend_handles.append(Line2D([], [], color='black', linewidth=2, linestyle='-', label='RMSE'))
         legend_handles.append(Line2D([], [], color='black', linewidth=2, linestyle='--', label='RMSE (ens)'))
+    if metric == "rmse_ens":
+        legend_handles.append(Line2D([], [], color='gray', linewidth=2, linestyle=':', alpha=0.8, label='Climatology'))
+        legend_handles.append(Line2D([], [], color='gray', linewidth=2, linestyle=':', alpha=0.6, label=r'$\sqrt{2}$ × Climatology'))
     for label in experiments:
         if label.strip().lower() == "persistence":
             legend_handles.append(Line2D([], [], color='black', linewidth=2, linestyle=':', alpha=0.8, label=label))
@@ -259,7 +308,11 @@ def plot_skill_curves(
                 ax.plot(x_vals, y_vals, label=label, color=color, linewidth=2)
                 if metric == "rmse":
                     _plot_rmse_ens_if_present(ax, ds, var_name, region, x_vals_full, mask_lt, max_leadtime_days, color, '--')
-        
+
+        # When metric is rmse_ens, add climatology and sqrt(2)*climatology reference lines
+        if metric == "rmse_ens":
+            _plot_climatology_and_sqrt2_for_rmse_ens(ax, experiments, baseline_ds, var_name, region, max_leadtime_days)
+
         # Plot baseline if provided
         if baseline_ds is not None:
             if var_name in baseline_ds.data_vars:

@@ -27,7 +27,7 @@ evaluation:
       path: "/pscratch/sd/z/zespinos/crps_deterministic_inference/crps_ocean_ze_003.002.000/forecast_atmos_ll.zarr"
       # Atmosphere variables
       # variables: ["t2m", "t850", "tau300-700", "tcwv", "ws10", "z250", "z500", "z1000", "ttr"]
-      variables: ["z500"]
+      variables: ["z500", "t2m", "ws10"]
       # variables: ["t2m", "t850", "ws10", "z250", "z500", "z1000", "ttr"]
       
       # Optional: Rename variables to match WBX standards or Target data
@@ -44,7 +44,7 @@ evaluation:
       path: "/pscratch/sd/z/zespinos/datasets/ll_1deg_1950-2023_3h_9var_atm_coupled-sst_sic.zarr"
       # Atmosphere variables
       # variables: ["t2m", "t850", "tau300-700", "tcwv", "ws10", "z250", "z500", "z1000", "ttr"]
-      variables: ["z500"]
+      variables: ["z500", "t2m", "ws10"]
       # variables: ["t2m", "t850", "ws10", "z250", "z500", "z1000", "ttr"]
 
   # ----------------------------------------------------------------------------

@@ -21,9 +21,9 @@ models:
   #   xid: "eval_crps_ocean_24H_ze_023.010.000"
   #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_crps_ocean_24H_ze_023.010.000/evals_ocean_023.010.001_timeseries.nc"
   
-  - label: "24H Baseline (Driven all)"
-    xid: "eval_023.010.001"
-    path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_023.010.001/evals_driven_ocean_023.010.001_timeseries.nc"
+  # - label: "24H Baseline (Driven all)"
+  #   xid: "eval_023.010.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_023.010.001/evals_driven_ocean_023.010.001_timeseries.nc"
 
   # - label: "24H Updated Latent (96,64,64)"
   #   xid: "eval_064.004.001"
@@ -44,31 +44,106 @@ models:
   # - label: "24H Baseline (bounded; Driven) (noise mod 32 - 300 epochs)"
   #   xid: "eval_082.002.000"
   #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_082.002.001/evals_driven_ocean_082.002.001_timeseries.nc"
-  - label: "24H (bounded; Driven) (encoder 2 + bn + decoder 2)"
-    xid: "eval_090.002.001"
-    path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_090.002.001/evals_driven_ocean_090.002.001_timeseries.nc"
 
-  - label: "24H (bounded; Driven) (bn + decoder 2)"
-    xid: "eval_079.002.000"
-    path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_079.002.000/evals_driven_ocean_079.002.000_timeseries.nc"
+  # - label: "24H (bounded; Driven) (encoder 2 + bn + decoder 2)"
+  #   xid: "eval_090.002.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_090.002.001/evals_driven_ocean_090.002.001_timeseries.nc"
 
-  - label: "24H (bounded; Driven) (bn)"
-    xid: "eval_089.002.001"
-    path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_089.002.001/evals_driven_ocean_089.002.001_timeseries.nc"
+  # - label: "24H (bounded; Driven) (bn + decoder 2)"
+  #   xid: "eval_079.002.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_079.002.000/evals_driven_ocean_079.002.000_timeseries.nc"
 
-  
+  # - label: "24H (bounded; Driven) (bn)"
+  #   xid: "eval_089.002.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_089.002.001/evals_driven_ocean_089.002.001_timeseries.nc"
 
-  # - label: "24H Baseline (bounded) (noise mod 32 150 epochs)"
+  # - label: "24H (bounded; Driven) (no infill + variogram)"
+  #   xid: "eval_121.000.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_121.000.000/evals_driven_ocean_121.000.000_timeseries.nc"
+
+  # - label: "24H (bounded; Driven) (no infill + variogram + SPADE)"
+  #   xid: "eval_122.000.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_122.000.000/evals_driven_ocean_122.000.000_timeseries.nc"
+
+  # - label: "24H (bounded; Driven) (no infill + variogram + ASN)"
+  #   xid: "eval_123.000.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_123.000.000/evals_driven_ocean_123.000.000_timeseries.nc"
+
+  # - label: "24H (bounded; Driven) (no infill + variogram + SPADE)"
+  #   xid: "eval_124.000.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_124.000.000/evals_driven_ocean_124.000.000_timeseries.nc"
+
+  # - label: "24H (bounded; Coupled) (Atmos and Ocean no infill)"
+  #   xid: "eval_116.001.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_116.001.000/evals_ocean_116.001.000_timeseries_timeseries.nc"
+
+  # - label: "24H (bounded; Driven)"
+  #   xid: "eval_11i6.001.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_116.001.000/evals_driven_ocean_116.001.000_timeseries_timeseries.nc"
+
+  # - label: "24H (bounded; Driven) (Atmos infill only)"
+  #   xid: "eval_116.006.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_116.006.000/evals_ocean_116.006.000_timeseries_timeseries.nc"
+
+  # - label: "24H Baseline (bounded; Driven) (noise mod 32 RMSE 150 epochs)"
+  #   xid: "eval_103.002.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_103.002.001/evals_driven_ocean_103.002.001_timeseries.nc"
+
+  # - label: "24H Baseline (bounded; Driven) (noise mod 32 150 epochs)"
   #   xid: "eval_091.002.001"
-  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_091.002.001/evals_ocean_091.002.001_timeseries.nc"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_091.002.001/evals_driven_ocean_091.002.001_timeseries.nc"
 
-  # - label: "24H Baseline (bounded) (noise mod 32 500 epochs)"
+  # - label: "24H Baseline (bounded; Driven) (noise mod 32 500 epochs)"
   #   xid: "eval_093.002.001"
-  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_093.002.001/evals_ocean_093.002.001_timeseries.nc"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_093.002.001/evals_driven_ocean_093.002.001_timeseries.nc"
 
-  # - label: "24H Baseline (bounded) (noise mod 32 650 epochs)"
+  # - label: "24H Baseline (bounded; Driven) (noise mod 32 650 epochs)"
   #   xid: "eval_094.005.000"
-  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_094.005.000/evals_ocean_094.005.000_timeseries.nc"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_094.005.000/evals_driven_ocean_094.005.000_timeseries.nc"
+
+  # - label: "24H Baseline (bounded; Driven) (noise mod 32 1000 epochs)"
+  #   xid: "eval_094.002.001"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_094.002.001/evals_driven_ocean_094.002.001_timeseries.nc"
+
+  # - label: "24H Baseline (bounded; Driven) (noise mod 32 phase 2 2000 epochs)"
+  #   xid: "eval_104.002.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_104.002.000/evals_driven_ocean_104.002.000_timeseries_timeseries.nc"
+
+  # - label: "24H (bounded; Driven) infilling 1000 epochs)"
+  #   xid: "eval_112.000.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_112.000.000/evals_driven_ocean_112.000.000_timeseries_timeseries.nc"
+
+  - label: "24H (bounded; Driven) no-inprinting 1000 epochs)"
+    xid: "eval_105.000.001"
+    path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_105.000.001/evals_driven_ocean_105.000.000_timeseries_timeseries.nc"
+
+  - label: "24H (bounded; Driven) AR finetuning 50 epochs)"
+    xid: "eval_116.000.000"
+    path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_116.000.000/evals_driven_ocean_116.000.000_timeseries_timeseries.nc"
+
+  - label: "24H (bounded; Driven) 2000 epochs - Fair CRPS)"
+    xid: "eval_163.000.000"
+    path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_163.000.000/evals_driven_ocean_163.000.000_timeseries_timeseries.nc"
+
+  - label: "24H (bounded; Driven) 2000 epochs - CRPS)"
+    xid: "eval_162.000.000"
+    path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_162.000.000/evals_driven_ocean_162.000.000_timeseries_timeseries.nc"
+
+  - label: "24H (bounded; Driven) 2000 epochs - CRPS - AR 70 epoch)"
+    xid: "eval_169.000.000"
+    path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_169.000.000/evals_driven_ocean_169.000.000_timeseries_timeseries.nc"
+
+  - label: "24H (bounded; Driven) 2000 epochs - CRPS - 4 dif. checkpoints)"
+    xid: "eval_162.002.000"
+    path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_162.002.000/evals_driven_ocean_162.002.000_timeseries.nc"
+
+  # - label: "24H (bounded; Driven) RMSE 300 epochs 24H)"
+  #   xid: "eval_157.000.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_157.000.000/evals_driven_ocean_157.000.000_timeseries_timeseries.nc"
+
+  # - label: "24H (bounded; Driven) RMSE 300 + spectral epochs 24H)"
+  #   xid: "eval_161.000.000"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_161.000.000/evals_driven_ocean_161.000.000_timeseries_timeseries.nc"
 
   # - label: "24H Baseline (bounded) (noise mod 32 650 epochs)"
   #   xid: "eval_094.005.001"
@@ -262,9 +337,9 @@ models:
   #   xid: "eval_000.000.001"
   #   path: "/pscratch/sd/z/zespinos/crps_deterministic_inference/deterministic_ocean_ze_000.000.000/evals_ocean_driven_timeseries_timeseries.nc"
 
-  - label: "Persistence"
-    xid: "persistence"
-    path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/evals_ocean_persistence_timeseries.nc"
+  # - label: "Persistence"
+  #   xid: "persistence"
+  #   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/evals_ocean_persistence_timeseries.nc"
 
 
 
@@ -280,6 +355,22 @@ baseline:
   type: "climatology"  # Options: "climatology", "persistence", or "model"
   path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/evals_ocean_probabilistic_climatology_timeseries.nc"
   label: "Climatology"  # Display label for baseline
+
+  # type: "model"
+  # label: "24H (bounded; Driven) 2000 epochs)"
+  # path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_162.000.000/evals_driven_ocean_162.000.000_timeseries_timeseries.nc"
+
+  # type: "model"  # Options: "climatology", "persistence", or "model"
+  # label: "24H (bounded; Driven) AR finetuning 50 epochs)"
+  # path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_116.000.000/evals_driven_ocean_116.000.000_timeseries_timeseries.nc"
+
+  # type: "model"
+  # label: "24H (bounded; Driven) no-inprinting)"
+  # path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_105.000.000/evals_driven_ocean_105.000.000_timeseries_timeseries.nc"
+
+  # type: "model"
+  # label: "24H Baseline (bounded; Driven) (noise mod 32 1000 epochs)"
+  # path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_094.002.001/evals_driven_ocean_094.002.001_timeseries.nc"
 
   # type: "model"
   # label: "24H Baseline (bounded) (noise mod 32)"
@@ -325,12 +416,12 @@ baseline:
 
 # Plotting options
 plotting:
-  metric: "crps_skill"  # Metric to plot
+  metric: "spread_skill"  # Metric to plot
   region: "global"     # Region for skill curves
   regions: ["global", "arctic"]  # Regions for scorecard (must be exactly 2)
   
   # Optional: show only the first N days of lead time (e.g. 45 for 45 days). Omit or null for full range.
-  max_leadtime_days: 90
+  max_leadtime_days: 45
 
   # Optional: in skill curves, plot one thin faint line per ensemble member (default: false).
   show_ensemble_members: false
@@ -344,4 +435,3 @@ plotting:
   # Output paths (optional - can be auto-generated)
   skill_curves_output: null  # null = auto-generate from xid
   scorecard_output: null      # null = auto-generate from xid
-

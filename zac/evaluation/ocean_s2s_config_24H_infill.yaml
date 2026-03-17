@@ -10,6 +10,7 @@ evaluation:
   # ----------------------------------------------------------------------------
   time_start: "2019-01-02"
   time_stop: "2019-12-31"
+  # time_stop: "2019-03-01"
 
   # time_start: "2021-01-02"
   # time_stop: "2021-05-29"
@@ -25,10 +26,9 @@ evaluation:
     prediction:
       # Must match the class name defined in your python script
       class: "DLESyMPredictionsFromXarray"
-      path: "/pscratch/sd/z/zespinos/crps_deterministic_inference/crps_ocean_24H_ze_noise_mod_opt_timing_no_infill_variogram_162.003.000/forecast_ocean_driven_ll.zarr"
+      path: "/pscratch/sd/z/zespinos/crps_deterministic_inference/crps_ocean_24H_ze_noise_mod_opt_timing_padding_AR_finetuning_116.006.000/forecast_ocean_ll.zarr"
       # Ocean variables
       variables: ["sit", "sst", "sic", "ssh", "s0m", "s10m", "s50m", "s100m", "s200m", "t0m", "t5m", "t10m", "t25m", "t37.5m", "t50m", "t62.5m", "t75m", "t87.5m", "t100m", "t125m", "t150m", "t200m", "t300m"]
-      # variables: ["sst", "sic"]
       
       # Optional: Rename variables to match WBX standards or Target data
       # rename:
@@ -44,7 +44,6 @@ evaluation:
       path: "/pscratch/sd/z/zespinos/datasets/ll_1deg_1994-2023_daily_23var_Coupled-3var_24H_ttr.zarr"
       # Ocean variables
       variables: ["sit", "sst", "sic", "ssh", "s0m", "s10m", "s50m", "s100m", "s200m", "t0m", "t5m", "t10m", "t25m", "t37.5m", "t50m", "t62.5m", "t75m", "t87.5m", "t100m", "t125m", "t150m", "t200m", "t300m"]
-      # variables: ["sst", "sic"]
       add_nan_mask: true  # Set true if you need to handle sparse masks
 
   # ----------------------------------------------------------------------------
@@ -59,12 +58,24 @@ evaluation:
   # ----------------------------------------------------------------------------
   # Aggregation (Spatial Reduction)
   # ----------------------------------------------------------------------------
+  # align_lsm_with_infill: when true, evaluation masking uses the same LSM and
+  # land-threshold as training/inference infilling so infilled forecast values
+  # do not contribute to skill. Default false (backward compatible).
+  # align_lsm_with_infill: false
+
+  # Use same LSM and land-threshold as training/inference infilling
+  align_lsm_with_infill: true
   masking:
     enabled: true   # Enable land-sea mask for ocean evaluation
     type: "land"    # Mask out land points (keep ocean only)
     path: "/pscratch/sd/z/zespinos/Data/ERA5/daily/era5_1950-2023_daily_1deg_lsm.nc"
     variable: "lsm" # lsm or land_sea_mask
-    threshold: 0.05  # Values >= 0.5 are considered land (and will be masked)
+    threshold: 0.05  # Values >= threshold are considered land (and will be masked)
+
+    # When align_lsm_with_infill is true, use these (same LSM file and threshold as
+    # ocean_land_infill_land_threshold in training/inference configs):
+    # lsm_path: "/path/to/your/lsm.zarr"   # or use path above
+    # land_threshold: 0.25                 # match ocean_land_infill_land_threshold
 
   aggregation:
     # Dimensions to collapse during aggregation (usually Lat/Lon to get a global scalar)
@@ -104,7 +115,7 @@ evaluation:
   # Output
   # ----------------------------------------------------------------------------
   output:
-    path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_162.003.000/evals_driven_ocean_162.003.000_timeseries.nc"
+    path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_116.006.000/evals_ocean_116.006.000_timeseries.nc"
     
     # Required if 'deterministic' metrics (ACC) are requested.
     # Defines the climatology mean for Anomaly Correlation Coefficient.

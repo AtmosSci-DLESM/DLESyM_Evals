@@ -8,7 +8,7 @@ evaluation:
   # ----------------------------------------------------------------------------
   # Time Configuration
   # ----------------------------------------------------------------------------
-  time_start: "2019-01-02"
+  time_start: "2018-12-31"
   time_stop: "2019-12-31"
   # time_stop: "2019-03-01"
 
@@ -26,8 +26,7 @@ evaluation:
     prediction:
       # Must match the class name defined in your python script
       class: "DLESyMPredictionsFromXarray"
-      path: "/pscratch/sd/z/zespinos/crps_deterministic_inference/crps_ocean_24H_ze_noise_mod_079.006.000/forecast_ocean_ll.zarr"
-      # path: "/pscratch/sd/z/zespinos/crps_deterministic_inference/deterministic_ocean_ze_000.004.000/forecast_ocean_ll.zarr"
+      path: "/pscratch/sd/z/zespinos/crps_deterministic_inference/crps_ocean_24H_ze_noise_mod_opt_timing_no_infill_variogram_AR_finetuning_169.000.000/forecast_ocean_driven_ll.zarr"
       # Ocean variables
       variables: ["sit", "sst", "sic", "ssh", "s0m", "s10m", "s50m", "s100m", "s200m", "t0m", "t5m", "t10m", "t25m", "t37.5m", "t50m", "t62.5m", "t75m", "t87.5m", "t100m", "t125m", "t150m", "t200m", "t300m"]
       
@@ -114,8 +113,7 @@ evaluation:
   # Output
   # ----------------------------------------------------------------------------
   output:
-    # path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_000.004.000/evals_ocean_000.004.000_timeseries.nc"
-    path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_079.006.000/evals_ocean_079.006.000_timeseries.nc"
+    path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_169.000.000/evals_ocean_169.000.000_timeseries.nc"
     
     # Required if 'deterministic' metrics (ACC) are requested.
     # Defines the climatology mean for Anomaly Correlation Coefficient.

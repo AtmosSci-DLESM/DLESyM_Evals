@@ -25,7 +25,7 @@ evaluation:
     prediction:
       # Must match the class name defined in your python script
       class: "DLESyMPredictionsFromXarray"
-      path: "/pscratch/sd/z/zespinos/crps_deterministic_inference/crps_ocean_24H_ze_noise_mod_opt_timing_no_infill_variogram_162.003.000/forecast_ocean_driven_ll.zarr"
+      path: "/pscratch/sd/z/zespinos/crps_deterministic_inference/crps_ocean_24H_ze_noise_mod_opt_timing_infilling_112.000.000/forecast_ocean_driven_ll.zarr"
       # Ocean variables
       variables: ["sit", "sst", "sic", "ssh", "s0m", "s10m", "s50m", "s100m", "s200m", "t0m", "t5m", "t10m", "t25m", "t37.5m", "t50m", "t62.5m", "t75m", "t87.5m", "t100m", "t125m", "t150m", "t200m", "t300m"]
       # variables: ["sst", "sic"]
@@ -41,7 +41,7 @@ evaluation:
 
     target:
       class: "DLESyMTargetsFromXarray"
-      path: "/pscratch/sd/z/zespinos/datasets/ll_1deg_1994-2023_daily_23var_Coupled-3var_24H_ttr.zarr"
+      path: "/pscratch/sd/z/zespinos/datasets/ll_1deg_1994-2023_daily_23var_Coupled-3var_24H_ttr_infill.zarr"
       # Ocean variables
       variables: ["sit", "sst", "sic", "ssh", "s0m", "s10m", "s50m", "s100m", "s200m", "t0m", "t5m", "t10m", "t25m", "t37.5m", "t50m", "t62.5m", "t75m", "t87.5m", "t100m", "t125m", "t150m", "t200m", "t300m"]
       # variables: ["sst", "sic"]
@@ -59,12 +59,14 @@ evaluation:
   # ----------------------------------------------------------------------------
   # Aggregation (Spatial Reduction)
   # ----------------------------------------------------------------------------
+  # Use same LSM and land-threshold as training/inference infilling
+  align_lsm_with_infill: true
   masking:
     enabled: true   # Enable land-sea mask for ocean evaluation
     type: "land"    # Mask out land points (keep ocean only)
     path: "/pscratch/sd/z/zespinos/Data/ERA5/daily/era5_1950-2023_daily_1deg_lsm.nc"
     variable: "lsm" # lsm or land_sea_mask
-    threshold: 0.05  # Values >= 0.5 are considered land (and will be masked)
+    threshold: 0.5  # Values >= 0.5 are considered land (and will be masked)
 
   aggregation:
     # Dimensions to collapse during aggregation (usually Lat/Lon to get a global scalar)
@@ -104,7 +106,7 @@ evaluation:
   # Output
   # ----------------------------------------------------------------------------
   output:
-    path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_162.003.000/evals_driven_ocean_162.003.000_timeseries.nc"
+    path: "/pscratch/sd/z/zespinos/crps_deterministic_evals/eval_112.000.000/evals_driven_ocean_112.000.000_timeseries.nc"
     
     # Required if 'deterministic' metrics (ACC) are requested.
     # Defines the climatology mean for Anomaly Correlation Coefficient.
